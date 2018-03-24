@@ -55,7 +55,7 @@ app.post('/articles', (request, response) => {
   function queryTwo() {
     client.query(
       `SELECT author_id FROM authors
-      WHERE author=$1`,
+      WHERE author=$1;`,
       [request.body.author],
 
       function(err, result) {
@@ -70,7 +70,7 @@ app.post('/articles', (request, response) => {
   function queryThree(author_id) {
     client.query(
       `INSERT INTO articles ( author_id, title, category, "publishedOn", body)
-      VALUES($1,$2,$3,$4,$5)`,
+      VALUES($1,$2,$3,$4,$5);`,
       [ author_id,
         request.body.title,
         request.body.category,
@@ -101,7 +101,7 @@ app.put('/articles/:id', function(request, response) {
       client.query(
         `UPDATE authors
         SET
-        author=$1, "authorUrl"=$2,
+        author=$1, "authorUrl"=$2
         WHERE author_id=$3;`,
         [ request.body.author,
           request.body.authorUrl,
